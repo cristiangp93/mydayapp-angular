@@ -1,21 +1,13 @@
 import {Action, createReducer, on} from "@ngrx/store";
 import {initialState, TasksState} from "./tasks.state";
-import {listTasks, getTasksSuccess} from "./tasks.actions";
+import {listTasksSuccess} from "./tasks.actions";
 
 export const _tasksReducer = createReducer(
   initialState,
-  on(listTasks, (state: TasksState, action: Action) => {
-    console.log("Inicia get tareas")
+  on(listTasksSuccess, (state: TasksState, action) => {
     return {
       ...state,
-      isLoading: true
-    }
-  }),
-  on(getTasksSuccess, (state: TasksState, action: Action) => {
-    console.log("get tareas success")
-    return {
-      ...state,
-      isLoading: false
+      tasks: action.tasks
     }
   }),
 );

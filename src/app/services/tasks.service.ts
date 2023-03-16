@@ -7,11 +7,12 @@ import {TaskModel} from "../models/task.model";
 })
 export class TasksService {
 
-  constructor() { }
+  constructor() {
+  }
 
   getTasks(): Observable<TaskModel[]> {
     if (localStorage.getItem('tasks')) {
-      return JSON.parse(localStorage.getItem('tasks')!);
+      return of(JSON.parse(localStorage.getItem('tasks')!));
     } else {
       return of([]);
     }
