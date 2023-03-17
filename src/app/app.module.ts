@@ -9,7 +9,8 @@ import {environment} from "../environments/environment";
 import {StoreModule} from "@ngrx/store";
 import {ROOT_REDUCER} from "./store/app.state";
 import {EffectsModule} from "@ngrx/effects";
-import {TasksEffects} from "./store/tasks/tasks.effects";
+import {TodosEffects} from "./store/tasks/todos.effects";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import {TasksEffects} from "./store/tasks/tasks.effects";
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(ROOT_REDUCER),
-    EffectsModule.forRoot([TasksEffects]),
+    EffectsModule.forRoot([TodosEffects]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production
-    })
+    }),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

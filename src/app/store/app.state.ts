@@ -1,12 +1,12 @@
 import {ActionReducerMap} from "@ngrx/store";
-import {TASKS_STATE_NAME} from "./tasks/tasks.selectors";
-import {TasksState} from "./tasks/tasks.state";
-import {tasksReducer} from "./tasks/tasks.reducer";
+import {TODOS_STATE_NAME} from "./tasks/todos.selectors";
+import {TodoState} from "./tasks/todo.state";
+import {todosReducer} from "./tasks/todos.reducer";
 
 export interface AppState {
-  [TASKS_STATE_NAME]: TasksState
+  [TODOS_STATE_NAME]: TodoState
 }
 
 export const ROOT_REDUCER: ActionReducerMap<AppState> = {
-  [TASKS_STATE_NAME]: tasksReducer
+  [TODOS_STATE_NAME]: todosReducer
 }

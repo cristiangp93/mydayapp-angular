@@ -1,27 +1,42 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/app.state";
-import {listTasks} from "../../store/tasks/tasks.actions";
-import {getTasks} from "../../store/tasks/tasks.selectors";
+import {listTodos} from "../../store/tasks/todo.actions";
+import {getTodos} from "../../store/tasks/todos.selectors";
 import {Observable} from "rxjs";
-import {TaskModel} from "../../models/task.model";
+import {TodoClass, TodoModel} from "../../models/todo.model";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {TodosService} from "../../services/todos.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  tasks$!: Observable<TaskModel[]>;
+  tasks$!: Observable<TodoModel[]>;
+  taskForm: FormGroup = new FormGroup({
+    title: new FormControl("", Validators.required)
+  });
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private tasksService: TodosService) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(listTasks());
+    this.store.dispatch(listTodos());
 
-    this.tasks$ = this.store.select(getTasks);
+    this.tasks$ = this.store.select(getTodos);
+  }
 
-    console.log(this.tasks$.subscribe())
+  onSubmit() {
+    if (this.taskForm.invalid) {
+      return;
+    }
+
+    const {title} = this.taskForm.value;
+
+    this.tasksService.add(title);
+
   }
 
 }
