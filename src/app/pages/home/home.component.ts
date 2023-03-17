@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit {
 
     this.tasksService.add(title);
 
+    this.taskForm.reset();
+
   }
 
 }

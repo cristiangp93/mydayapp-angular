@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, switchMap, tap} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {TodoClass, TodoModel} from "../models/todo.model";
-import {getTodos} from "../store/tasks/todos.selectors";
 import {StorageService} from "./storage.service";
 
 @Injectable({
@@ -16,6 +15,7 @@ export class TodosService {
   // private filterBS = new BehaviorSubject<Filter>(this.filter)
 
   constructor(private storage: StorageService) {
+    this.readStorage()
   }
 
   getTodos() {
